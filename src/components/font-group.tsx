@@ -26,60 +26,78 @@ import {
 const data: FontType[] = [
   {
     id: "m5gr84i9",
-    fontName: "Arial",
-    preview: "Example of Arial",
+    name: "Exapmple 1",
+    fonts: "Example of Arial",
+    count: 5,
   },
   {
     id: "3u1reuv4",
-    fontName: "Roboto",
-    preview: "Example of Roboto",
+    name: "Exaple 2",
+    fonts: "Example of Roboto",
+    count: 0,
   },
   {
     id: "derv1ws0",
-    fontName: "Times New Roman",
-    preview: "Example of Times new Roman",
+    name: "Example 3",
+    fonts: "Example of Times new Roman",
+    count: 1,
   },
   {
     id: "3u1re23v4",
-    fontName: "Roboto",
-    preview: "Example of Roboto",
+    name: "Roboto",
+    fonts: "Example of Roboto",
+    count: 3,
   },
 ];
 
 export type FontType = {
   id: string;
-  fontName: string;
-  preview: string;
+  name: string;
+  fonts: string;
+  count: number;
 };
 
 export const columns: ColumnDef<FontType>[] = [
   {
-    accessorKey: "fontName",
-    header: "Font Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("fontName")}</div>
-    ),
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
   {
-    accessorKey: "preview",
+    accessorKey: "fonts",
     header: () => {
-      return <div> Preview</div>;
+      return <div> Fonts</div>;
     },
-    cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("preview")}</div>
-    ),
+    cell: ({ row }) => <div className="lowercase">{row.getValue("fonts")}</div>,
+  },
+
+  {
+    accessorKey: "count",
+    header: () => {
+      return <div>Count</div>;
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("count")}</div>,
   },
 
   {
     id: "actions",
     enableHiding: false,
     cell: () => {
-      return <Button variant="ghost">Delete</Button>;
+      return (
+        <div className="whitespace-nowrap">
+          <Button variant="ghost" className="text-blue-500">
+            Edit
+          </Button>
+          <Button variant="ghost" className="text-red-500">
+            Delete
+          </Button>
+        </div>
+      );
     },
   },
 ];
 
-export function FontList() {
+export function FontGroup() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

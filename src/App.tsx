@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { FontList } from "./components/font-list";
+import { FontGroup } from "./components/font-group";
 
 function App() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +37,15 @@ function App() {
           Browse a list of Zepto fonts to build your font group
         </span>
         <FontList />
+      </section>
+
+      {/* font group */}
+      <section className="flex flex-col justify-start items-start w-1/2 p-7 border-gray-300 border-1 shadow">
+        <h1 className="text-2xl font-medium">Our Font Group</h1>
+        <span className="text-sm opacity-75">
+          List of all available font group.
+        </span>
+        <FontGroup />
       </section>
     </div>
   );
