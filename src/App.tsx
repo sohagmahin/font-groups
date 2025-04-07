@@ -9,7 +9,7 @@ function App() {
   const [fontGroups, setFontGroups] = useState([]);
 
   return (
-    <div className="max-w-[1400px] text-black p-10 flex flex-col gap-10 justify-center items-center">
+    <div className="text-black p-10 flex flex-col gap-10 justify-center items-center">
       <FontInput setFonts={setFonts} />
       <FontList fonts={fonts} setFonts={setFonts} />
       <CreateFontGroup fonts={fonts} setFontGroups={setFontGroups} />

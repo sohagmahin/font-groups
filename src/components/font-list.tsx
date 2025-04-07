@@ -10,7 +10,7 @@ import { Button } from "./ui/button";
 
 export function FontList({ fonts, setFonts }) {
   return (
-    <section className="flex flex-col justify-start items-start w-1/2 p-7 border-gray-300 border-1 shadow">
+    <section className="flex flex-col justify-start items-start w-full sm:w-1/2 p-7 border-gray-300 border-1 shadow">
       <h1 className="text-xl font-medium">Our Fonts</h1>
       <span className="text-sm opacity-75">
         Browse a list of Zepto fonts to build your font group

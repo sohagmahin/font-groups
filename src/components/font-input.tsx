@@ -58,7 +58,7 @@ function FontInput({ setFonts }) {
   return (
     <section
       className={cn(
-        "flex flex-col justify-center items-center h-60 w-1/2 border-gray-200 border-1 shadow cursor-pointer",
+        "flex flex-col justify-center items-center h-60 w-full sm:w-1/2 border-gray-200 border-1 shadow cursor-pointer",
         {
           "border-green-600 border-2": isDragging,
         }
