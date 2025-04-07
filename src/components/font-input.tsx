@@ -7,52 +7,56 @@ function FontInput({ setFonts }) {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleFontUpload = (e) => {
-    const file = e.target.files[0];
-    const fontName = file.name.replace(".ttf", "").replace(/\s/g, "");
+    const files = Array.from(e.target.files);
+    files.forEach((file: any) => {
+      const fontName = file?.name.replace(".ttf", "").replace(/\s/g, "");
+      const blobUrl = URL.createObjectURL(file);
+      const style = document.createElement("style");
+      style.innerHTML = `
+        @font-face {
+          font-family: '${fontName}';
+          src: url('${blobUrl}');
+        }
+      `;
+      document.head.appendChild(style);
 
-    const blobUrl = URL.createObjectURL(file);
-    const style = document.createElement("style");
-    style.innerHTML = `
-      @font-face {
-        font-family: '${fontName}';
-        src: url('${blobUrl}');
-      }
-    `;
-    document.head.appendChild(style);
+      const newFont = {
+        fontFamily: fontName,
+      };
 
-    const newFont = {
-      fontFamily: fontName,
-    };
-
-    setFonts((prev) => [...prev, newFont]);
+      setFonts((prev) => [...prev, newFont]);
+    });
   };
 
   const handleOnDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file && !file.name.endsWith(".ttf")) {
-      alert("Only .ttf files are allowed");
-      return;
-    }
+    const files = Array.from(e.dataTransfer.files);
 
-    const fontName = file.name.replace(".ttf", "").replace(/\s/g, "");
-    const blobUrl = URL.createObjectURL(file);
-    const style = document.createElement("style");
-
-    style.innerHTML = `
-      @font-face {
-        font-family: '${fontName}';
-        src: url('${blobUrl}');
+    files.forEach((file: any) => {
+      if (file && !file.name.endsWith(".ttf")) {
+        alert("Only .ttf files are allowed");
+        return;
       }
-    `;
-    document.head.appendChild(style);
 
-    const newFont = {
-      fontFamily: fontName,
-    };
+      const fontName = file.name.replace(".ttf", "").replace(/\s/g, "");
+      const blobUrl = URL.createObjectURL(file);
+      const style = document.createElement("style");
 
-    setFonts((prev) => [...prev, newFont]);
+      style.innerHTML = `
+        @font-face {
+          font-family: '${fontName}';
+          src: url('${blobUrl}');
+        }
+      `;
+      document.head.appendChild(style);
+
+      const newFont = {
+        fontFamily: fontName,
+      };
+
+      setFonts((prev) => [...prev, newFont]);
+    });
   };
 
   return (
@@ -77,6 +81,7 @@ function FontInput({ setFonts }) {
         ref={fileInputRef}
         type="file"
         accept=".ttf"
+        multiple
         className="hidden"
         onChange={handleFontUpload}
         placeholder="Click to upload font"
@@ -87,7 +92,7 @@ function FontInput({ setFonts }) {
         <span className="font-semibold">Click to upload</span> or drag and drop
       </p>
       <span className="font-normal opacity-50 text-sm">
-        Only TTF File Allowed
+        Only TTF Files Allowed
       </span>
     </section>
   );
