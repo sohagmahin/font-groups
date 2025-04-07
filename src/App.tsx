@@ -13,7 +13,11 @@ function App() {
       <FontInput setFonts={setFonts} />
       <FontList fonts={fonts} setFonts={setFonts} />
       <CreateFontGroup fonts={fonts} setFontGroups={setFontGroups} />
-      <FontGroupList fontGroups={fontGroups} setFontGroups={setFontGroups} />
+      <FontGroupList
+        fontGroups={fontGroups}
+        setFontGroups={setFontGroups}
+        fonts={fonts}
+      />
     </div>
   );
 }
